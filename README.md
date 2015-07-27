@@ -19,7 +19,8 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
     - [Serverspec](/infrastructure-as-code/serverspec.md)
 - [Git入門](/git.md)
 - Bitbucket入門
-- OOP入門
+- Github入門
+- [OOP入門](/oop.md)
 - Perlテスト入門
 - ORM入門(Teng)
 - CI入門

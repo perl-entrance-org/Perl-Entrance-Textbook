@@ -4,14 +4,14 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
 
 ## 目次
 
-- Perl入門 [(2014年度 Perl入学式資料)](http://www.perl-entrance.org/handout.html#handout-2014)
+- Perlチュートリアル [(2014年度 Perl入学式資料)](http://www.perl-entrance.org/handout.html#handout-2014)
     - [Perl入学式 第1回 : Perl環境の構築](https://github.com/perl-entrance-org/workshop-2014-01/blob/master/build_perl.md)
     - [Perl入学式 第1回 : Hello, world!](https://github.com/perl-entrance-org/workshop-2014-01/blob/master/hello_world.md)
     - [Perl入学式 第2回](https://github.com/perl-entrance-org/workshop-2014-02/blob/master/slide.md)
     - [Perl入学式 第3回](https://github.com/perl-entrance-org/workshop-2014-03/blob/master/slide.md)
     - [Perl入学式 第4回](https://github.com/perl-entrance-org/workshop-2014-04/blob/master/slide.md)
-- Amon2入門(1)
-- Amon2入門(2)
+- [Amon2入門(1)](/amon2/1.md)
+- [Amon2入門(2)](/amon2/2.md)
 - Homebrew
 - Infrastructure as Code
     - Vagrant

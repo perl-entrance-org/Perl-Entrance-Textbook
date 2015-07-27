@@ -17,7 +17,7 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
     - [Vagrant](/infrastructure-as-code/vagrant.md)
     - [Ansible](/infrastructure-as-code/ansible.md)
     - [Serverspec](/infrastructure-as-code/serverspec.md)
-- Git入門
+- [Git入門](/git.md)
 - Bitbucket入門
 - OOP入門
 - Perlテスト入門

@@ -12,7 +12,7 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
     - [Perl入学式 第4回](https://github.com/perl-entrance-org/workshop-2014-04/blob/master/slide.md)
 - [Amon2入門(1)](/amon2/1.md)
 - [Amon2入門(2)](/amon2/2.md)
-- Homebrew
+- [Homebrewによる環境構築](/homebrew.md) (Mac OS Xユーザ向けの資料です)
 - Infrastructure as Code
     - Vagrant
     - Ansible

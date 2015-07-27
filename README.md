@@ -14,9 +14,9 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
 - [Amon2入門(2)](/amon2/2.md)
 - [Homebrewによる環境構築](/homebrew.md) (Mac OS Xユーザ向けの資料です)
 - Infrastructure as Code
-    - Vagrant
-    - Ansible
-    - Serverspec
+    - [Vagrant](/infrastructure-as-code/vagrant.md)
+    - [Ansible](/infrastructure-as-code/ansible.md)
+    - [Serverspec](/infrastructure-as-code/serverspec.md)
 - Git入門
 - Bitbucket入門
 - OOP入門

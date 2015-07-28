@@ -224,7 +224,7 @@ Playbookで設定出来る項目のうち, いくつかを紹介します.
 ホストで実行したい処理を記述することができます.
 
 ```yaml
-- tasks:
+tasks:
   - name: Hello, Ansible!
     shell: echo 'Hello, Ansible!' > /tmp/ansible1.txt
 ```

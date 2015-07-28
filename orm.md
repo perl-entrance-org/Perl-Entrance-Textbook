@@ -393,7 +393,7 @@ my $papix = $teng->single(user => { id => 1 });
 $teng->update(user => { name => 'super papix' }, { id => 1 });
 
 print $papix->name; # => 'papix' -> 同期していないので, 'name'は'papix'のまま
-$papix->refetch;
+$papix = $papix->refetch;
 print $papix->name; # => 'super papix' -> `refetch`で同期したので, 'super papix'になった
 ```
 

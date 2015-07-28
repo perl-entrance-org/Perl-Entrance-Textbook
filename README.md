@@ -24,9 +24,9 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
 - [Perlテスト入門](/test.md)
 - [ORM入門(Teng)](/orm.md)
 - CI入門(Wercker)
-- 例外基礎
+- [例外基礎](exception.md)
 - バリデーション基礎
-- WebAppテスト入門
+- [WebAppテスト入門](webapp-test.md)
 - React.js入門
 
 ## ライセンス

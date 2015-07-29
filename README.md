@@ -32,3 +32,7 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
 ## ライセンス
 
 このリポジトリ内にある資料のライセンスについては, Perl入学式公式サイトの[License](http://www.perl-entrance.org/license.html)ページに記載されているライセンスに準じます.
+
+## Author / Contributor
+
+｢Perl入学式の教科書｣に掲載されている各資料の執筆者と貢献者の一覧は[こちら](/author.md)にまとめています.

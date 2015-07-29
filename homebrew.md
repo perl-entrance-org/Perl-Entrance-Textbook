@@ -18,7 +18,7 @@ Homebrewを利用すれば, CentOSの`yum`やUbuntuの`apt-get`のように, 例
 
 # Homebrewの導入
 
-Homebrewを導入する前に, XcodeのCommand Line Toolsを導入しておく必要がります.
+Homebrewを導入する前に, XcodeのCommand Line Toolsを導入しておく必要があります.
 まだ導入していない場合, 以下のコマンドを入力しておきましょう.
 
 ```
@@ -33,7 +33,7 @@ $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/maste
 
 ## コラム: Homebrew Cask
 
-Homebrewが対応しているのは, 主にプログラムの開発に利用するツールやライブラリが主で, 例えばHipChatのクライアントはChromeといったブラウザ(GUIアプリケーション)には対応していません.
+Homebrewが対応しているのは, プログラムの開発に利用するツールやライブラリが主で, 例えばHipChatのクライアントやChromeといったブラウザ(GUIアプリケーション)には対応していません.
 このようなアプリケーションをHomebrewで管理するための拡張として, [Homebrew Cask](http://caskroom.io/)が開発されています.
 
 別途, [Homebrew-file](https://github.com/rcmdnk/homebrew-file)などの仕組みを利用すれば, 新しいMacを用意した後, まずHomebrewを入れてから, Homebrew経由で各種アプリケーションやツール, ライブラリを導入すれば, 開発環境がほぼ完成する, といった環境を準備することができます(自分の場合, Homebrew-fileなどを利用せず, `brew install ...`を連ねて書いたシェルスクリプトを各PCで共有して管理しています).
@@ -249,7 +249,7 @@ elasticsearch      heroku-toolbelt    lnav               openconnect        traf
 
 ### `upgrade`
 
-Homebrewで管理しているツールやライブラリの更新をします.
+Homebrewで管理しているツールやライブラリを更新します.
 
 ```
 $ brew upgrade

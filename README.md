@@ -2,8 +2,10 @@
 
 Perl入学式卒業後の学習に, また企業や研究室の研修の資料などとしてご活用下さい.
 
-## 目次
+## ライセンス
+このリポジトリ内にある資料のライセンスについては, Perl入学式公式サイトの[License](http://www.perl-entrance.org/license.html)ページに記載されているライセンスに準じます.
 
+## 目次
 - Perlチュートリアル [(2014年度 Perl入学式資料)](http://www.perl-entrance.org/handout.html#handout-2014)
     - [Perl入学式 第1回 : Perl環境の構築](https://github.com/perl-entrance-org/workshop-2014-01/blob/master/build_perl.md)
     - [Perl入学式 第1回 : Hello, world!](https://github.com/perl-entrance-org/workshop-2014-01/blob/master/hello_world.md)
@@ -29,10 +31,9 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
 - [WebAppテスト入門](webapp-test.md)
 - React.js入門
 
-## ライセンス
-
-このリポジトリ内にある資料のライセンスについては, Perl入学式公式サイトの[License](http://www.perl-entrance.org/license.html)ページに記載されているライセンスに準じます.
-
 ## Author / Contributor
-
 ｢Perl入学式の教科書｣に掲載されている各資料の執筆者と貢献者の一覧は[こちら](/author.md)にまとめています.
+
+## Issue / Pull Requestについて
+このリポジトリに対するIssueやPull Requestについては, 日本語で書いて頂いて構いません.
+また, コミットログに関しても日本語で記載して頂いて構いません.

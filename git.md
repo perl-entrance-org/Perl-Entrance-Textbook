@@ -54,9 +54,9 @@ Initialized empty Git repository in /Users/username/git-tutorial/.git/
 GitHubやBitBucketの場合, それぞれリポジトリのページにURLが掲載されています
 
 ### Githubの場合
-![](/git/1.png)
-### Bitbucketの場合
 ![](/git/2.png)
+### Bitbucketの場合
+![](/git/1.png)
 
 矢印の部分がそうです. 今回は, `git@github.com:perl-entrance-org/Perl-Entrance-Textbook.git`のようなURLが記載されています.
 

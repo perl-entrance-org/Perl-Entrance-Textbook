@@ -29,6 +29,8 @@ Author: @papix
 # [Git入門](/git.md)
 Author: @papix
 
+Contributor: @htk291
+
 # [OOP入門](/oop.md)
 Author: @papix
 

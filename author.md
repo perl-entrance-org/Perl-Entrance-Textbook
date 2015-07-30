@@ -42,6 +42,9 @@ Author: @papix
 
 Contributor: @yuyashiraki
 
+# [CI入門(Wercker)](/ci/wercker.md)
+Author: @papix
+
 # [例外基礎](exception.md)
 Author: @papix
 

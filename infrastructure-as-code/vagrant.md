@@ -69,7 +69,7 @@ Vagrantのインストールが無事終わっていれば, コマンドライ�
 $ which vagrant
 /usr/bin/vagrant
 $ vagrant --version
-Vagrant 1.7.2
+Vagrant 1.8.1
 ```
 
 ...それでは, Vagrantを利用して開発環境となる仮想マシンを立ち上げていきましょう.
@@ -156,45 +156,41 @@ Vagrantfile
 
 $ vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'ubuntu/trusty64'...
+==> default: Matching MAC address for NAT networking...
 ==> default: Checking if box 'ubuntu/trusty64' is up to date...
+==> default: Setting the name of the VM: vagrant_default_1462843924383_21190
 ==> default: Clearing any previously set forwarded ports...
 ==> default: Clearing any previously set network interfaces...
 ==> default: Preparing network interfaces based on configuration...
     default: Adapter 1: nat
 ==> default: Forwarding ports...
-    default: 22 => 2222 (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
 ==> default: Booting VM...
 ==> default: Waiting for machine to boot. This may take a few minutes...
     default: SSH address: 127.0.0.1:2222
     default: SSH username: vagrant
     default: SSH auth method: private key
-    default: Warning: Connection timeout. Retrying...
-    default: Warning: Remote connection disconnect. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
 ==> default: Machine booted and ready!
-Got different reports about installed GuestAdditions version:
-Virtualbox on your host claims:   4.3.10
-VBoxService inside the vm claims: 4.3.26
-Going on, assuming VBoxService is correct...
-GuestAdditions seems to be installed (4.3.26) correctly, but not running.
-Got different reports about installed GuestAdditions version:
-Virtualbox on your host claims:   4.3.10
-VBoxService inside the vm claims: 4.3.26
-Going on, assuming VBoxService is correct...
-stdin: is not a tty
-Starting the VirtualBox Guest Additions ...done.
-Got different reports about installed GuestAdditions version:
-Virtualbox on your host claims:   4.3.10
-VBoxService inside the vm claims: 4.3.26
-Going on, assuming VBoxService is correct...
-Got different reports about installed GuestAdditions version:
-Virtualbox on your host claims:   4.3.10
-VBoxService inside the vm claims: 4.3.26
-Going on, assuming VBoxService is correct...
 ==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 4.3.36
+    default: VirtualBox Version: 5.0
 ==> default: Mounting shared folders...
-    default: /vagrant => /path/to/vagrantfile
-==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
-==> default: to force provisioning. Provisioners marked to run always will still run.
+    default: /vagrant => /Users/takayuki.fukumoto/Dropbox/sandbox/vagrant
 ```
 
 現在の仮想マシンの様子は, `vagrant status`で確認できます.
@@ -228,25 +224,16 @@ Vagrantで立ち上げた仮想マシンへの接続方法はいくつかあり�
 
 ```
 $ vagrant ssh
-Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+Welcome to Ubuntu 14.04.4 LTS (GNU/Linux 3.13.0-85-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com/
 
-  System information as of Fri Mar 27 04:19:22 UTC 2015
-
-  System load:  0.25              Processes:           75
-  Usage of /:   2.8% of 39.34GB   Users logged in:     0
-  Memory usage: 24%               IP address for eth0: 10.0.2.15
-  Swap usage:   0%
-
-  Graph this data and manage this system at:
-    https://landscape.canonical.com/
+ System information disabled due to load higher than 1.0
 
   Get cloud support with Ubuntu Advantage Cloud Guest:
     http://www.ubuntu.com/business/services/cloud
 
 
-Last login: Fri Mar 27 04:19:22 2015 from 10.0.2.2
 vagrant@vagrant-ubuntu-trusty-64:~$
 ```
 
@@ -264,7 +251,7 @@ Host default
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile /path/to/vagrantfile/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile "/path/to/vagrant/.vagrant/machines/default/virtualbox/private_key"
   IdentitiesOnly yes
   LogLevel FATAL
 ```
@@ -281,7 +268,7 @@ Host vagrant-tutorial
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
   PasswordAuthentication no
-  IdentityFile /path/to/vagrantfile/.vagrant/machines/default/virtualbox/private_key
+  IdentityFile "/path/to/vagrant/.vagrant/machines/default/virtualbox/private_key"
   IdentitiesOnly yes
   LogLevel FATAL
 ```
@@ -348,25 +335,16 @@ VM, run `vagrant status NAME`.
 
 ```
 $ ssh vagrant@192.168.33.10 -i /path/to/vagrantfile/.vagrant/machines/app/virtualbox/private_key
-Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+Welcome to Ubuntu 14.04.4 LTS (GNU/Linux 3.13.0-85-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com/
 
-  System information as of Mon Mar 30 05:25:07 UTC 2015
-
-  System load:  0.09              Processes:           73
-  Usage of /:   2.8% of 39.34GB   Users logged in:     0
-  Memory usage: 26%               IP address for eth0: 10.0.2.15
-  Swap usage:   0%                IP address for eth1: 192.168.33.11
-
-  Graph this data and manage this system at:
-    https://landscape.canonical.com/
+ System information disabled due to load higher than 1.0
 
   Get cloud support with Ubuntu Advantage Cloud Guest:
     http://www.ubuntu.com/business/services/cloud
 
 
-Last login: Mon Mar 30 05:25:08 2015 from 192.168.33.1
 vagrant@app:~$
 ```
 
@@ -663,7 +641,7 @@ Nginx用の設定ファイルを用意します.
 root@vagrant-ubuntu-trusty-64:~# vi /etc/nginx/conf.d/app.conf
 + server {
 +     listen      80;
-+ 
++
 +     location / {
 +         proxy_pass http://127.0.0.1:5000;
 +     }
@@ -674,7 +652,7 @@ root@vagrant-ubuntu-trusty-64:~# vi /etc/nginx/conf.d/app.conf
 
 ```
 root@vagrant-ubuntu-trusty-64:~# vi /etc/nginx/nginx.conf
-  
+
       include /etc/nginx/conf.d/*.conf;
 -     include /etc/nginx/sites-enabled/*;
 +     #include /etc/nginx/sites-enabled/*;

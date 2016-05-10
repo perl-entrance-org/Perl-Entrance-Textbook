@@ -49,18 +49,18 @@ $ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 ```
 $ exec $SHELL -l
 $ rbenv --version
-rbenv 0.4.0-146-g7ad01b2
+rbenv 0.4.0-153-g3b6faa8
 ```
 
 これで, `rbenv`コマンドが利用出来るようになっています.
-それでは, `rbenv intall`コマンドで, 現時点での最新版であるRuby 2.1.4をインストールします.
+それでは, `rbenv intall`コマンドで, 現時点での最新版であるRuby 2.2.2をインストールします.
 
 ```
-$ rbenv install 2.1.4
-Downloading ruby-2.1.4.tar.gz...
--> http://dqw8nmjcqpjn7.cloudfront.net/bf9952cdeb3a0c6a5a27745c9b4c0e5e264e92b669b2b08efb363f5156549204
-Installing ruby-2.1.4...
-Installed ruby-2.1.4 to /Users/username/.rbenv/versions/2.1.4
+$ rbenv install 2.2.2
+Downloading ruby-2.2.2.tar.gz...
+-> https://dqw8nmjcqpjn7.cloudfront.net/5ffc0f317e429e6b29d4a98ac521c3ce65481bfd22a8cf845fa02a7b113d9b44
+Installing ruby-2.2.2...
+Installed ruby-2.2.2 to /Users/username/.rbenv/versions/2.2.2
 ```
 
 問題なくインストールが完了していれば, `which ruby`と`ruby -v`の出力が, 次のようになっているはずです.
@@ -69,7 +69,7 @@ Installed ruby-2.1.4 to /Users/username/.rbenv/versions/2.1.4
 $ which ruby
 /Users/username/.rbenv/shims/ruby
 $ ruby -v
-ruby 2.1.4p265 (2014-10-27 revision 48166) [x86_64-darwin14.0]
+ruby 2.2.2p95 (2015-04-13 revision 50295) [x86_64-darwin14]
 ```
 
 Rubyのインストールと同時に, `gem`コマンドも利用出来るようになっているので, 後は冒頭の記述の通り, `gem install serverspec`でServerspecをインストールしましょう.
@@ -237,7 +237,7 @@ end
 
 ```
 $ rake spec
-/Users/username/.rbenv/versions/2.1.4/bin/ruby -I/Users/username/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/rspec-support-3.2.2/lib:/Users/username/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/rspec-core-3.2.1/lib /Users/username/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/rspec-core-3.2.1/exe/rspec --pattern spec/vagrant/\*_spec.rb
+/Users/username/.rbenv/versions/2.2.2/bin/ruby -I/Users/username/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rspec-support-3.4.1/lib:/Users/username/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rspec-core-3.4.1/lib /Users/username/.rbenv/versions/2.2.2/lib/ruby/gems/2.2.0/gems/rspec-core-3.4.1/exe/rspec --pattern spec/vagrant/\*_spec.rb
 
 Package "nginx"
   should be installed

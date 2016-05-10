@@ -62,7 +62,7 @@ $ vagrant ssh-config --host vagrant >> ~/.ssh/config
 
 ```
 $ ssh vagrant
-Welcome to Ubuntu 14.04.2 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+Welcome to Ubuntu 14.04.4 LTS (GNU/Linux 3.13.0-85-generic x86_64)
     ... 中略 ...
 vagrant@vagrant-ubuntu-trusty-64:~$
 ```

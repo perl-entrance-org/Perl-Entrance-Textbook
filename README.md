@@ -7,13 +7,13 @@ Perl入学式卒業後の学習に, また企業や研究室の研修の資料�
 
 ## 目次
 - Perlチュートリアル [(2017年度 Perl入学式資料)](http://www.perl-entrance.org/handout.html#handout-2017)
-    - [Perl入学式 第1回 : 環境構築編](https://github.com/perl-entrance-org/workshop-2017/blob/master/1st/part1.md)
-    - [Perl入学式 第1回 : Shell入門](https://github.com/perl-entrance-org/workshop-2017/blob/master/1st/part2.md)
-    - [Perl入学式 第1回 : Hello, world!](https://github.com/perl-entrance-org/workshop-2017/blob/master/1st/part3.md)
+    - [Perl入学式 第1回 : 環境構築編](https://github.com/perl-entrance-org/workshop-2017/blob/master/1st/part1.md)
+    - [Perl入学式 第1回 : Shell入門](https://github.com/perl-entrance-org/workshop-2017/blob/master/1st/part2.md)
+    - [Perl入学式 第1回 : Hello, world!](https://github.com/perl-entrance-org/workshop-2017/blob/master/1st/part3.md)
     - [Perl入学式 第2回](https://github.com/perl-entrance-org/workshop-2017/blob/master/2nd/slide.md)
     - [Perl入学式 第3回](https://github.com/perl-entrance-org/workshop-2017/blob/master/3rd/slide.md)
     - [Perl入学式 第4回](https://github.com/perl-entrance-org/workshop-2017/blob/master/4th/slide.md)
-    - [Perl入学式 第5回](https://github.com/perl-entrance-org/workshop-2017/blob/master/5th/slide.md)
+    - [Perl入学式 第5回](https://github.com/perl-entrance-org/workshop-2017/blob/master/5th/slide.md)
 - [Amon2入門 (第1部)](/amon2/1.md)
 - [Amon2入門 (第2部)](/amon2/2.md)
 - [Homebrewによる環境構築](/homebrew.md) (Mac OS Xユーザ向けの資料です)

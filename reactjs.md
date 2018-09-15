@@ -67,7 +67,7 @@ Reactでは、画面上のすべての要素を **コンポーネント** とし
 
 また、完成したTODOアプリケーションのソースコードはGitHubにあります。
 
-https://github.com/miniturbo/react-todo
+[https://github.com/perl-entrance-org/Perl-Entrance-Textbook/tree/examples/react-todo](/examples/react-todo)
 
 ## 準備
 

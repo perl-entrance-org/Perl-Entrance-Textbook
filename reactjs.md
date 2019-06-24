@@ -10,7 +10,7 @@ Webアプリケーションを開発するにあたり、エンドユーザが�
 
 # Reactとは
 
-[React](http://facebook.github.io/react/)とは、Facebook社とInstagram社が開発した **UIの構築に特化したJavaScriptライブラリ** です。FacebookやInstagramに加え、Yahoo!やAtlassianなど、[様々な企業](https://github.com/facebook/react/wiki/Sites-Using-React)で利用されはじめており、国内でも注目の高いライブラリです。
+[React](https://reactjs.org/)とは、Facebook社とInstagram社が開発した **UIの構築に特化したJavaScriptライブラリ** です。FacebookやInstagramに加え、Yahoo!やAtlassianなど、[様々な企業](https://github.com/facebook/react/wiki/Sites-Using-React)で利用されはじめており、国内でも注目の高いライブラリです。
 
 それでは、早速Reactの特徴を見ていきましょう。
 
@@ -67,7 +67,7 @@ Reactでは、画面上のすべての要素を **コンポーネント** とし
 
 また、完成したTODOアプリケーションのソースコードはGitHubにあります。
 
-https://github.com/miniturbo/react-todo
+[https://github.com/perl-entrance-org/Perl-Entrance-Textbook/tree/examples/react-todo](/examples/react-todo)
 
 ## 準備
 
@@ -79,11 +79,12 @@ https://github.com/miniturbo/react-todo
   <head>
     <meta charset="utf-8">
     <title>React TODO</title>
-    <script src="https://fb.me/react-0.13.3.js"></script>
-    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.0.0/babel.min.js"></script>
   </head>
   <body>
-    <script type="text/jsx">
+    <script type="text/babel">
       // ここにソースコードを書いていきます
     </script>
   </body>
@@ -101,23 +102,23 @@ https://github.com/miniturbo/react-todo
 まずは、TODOアプリケーション全体を囲う要素となる「TodoAppコンポーネント」を定義・表示します。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  render: function() {
+class TodoApp extends React.Component {
+  render() {
     return (
       <div className="todoApp">
         Hello React! I am a TODO Application.
       </div>
     );
   }
-});
+}
 
-React.render(<TodoApp />, document.body);
+ReactDOM.render(<TodoApp />, document.body);
 ```
 
 上から順にコードを見ていきましょう。
 
-まず、`render`メソッドを持ったオブジェクトを`React.createClass`に渡して、TodoAppコンポーネントを定義しています。renderメソッドは、コンポーネントが表示される際に呼ばれるメソッドです。必ず1つのコンポーネントを返す必要があります。
-そして、定義したコンポーネントを、`React.render`を用いて実際のDOM（今回はBodyタグ）に適用しています。
+まず、`React.Component`クラスを継承した`render`メソッドを持つクラスを作り、TodoAppコンポーネントを定義しています。renderメソッドは、コンポーネントが表示される際に呼ばれるメソッドです。必ず1つのコンポーネントを返す必要があります。
+そして、定義したコンポーネントを、`ReactDOM.render`を用いて実際のDOM（今回は`<body>`タグ）に適用しています。
 
 ## JSXについて
 
@@ -129,17 +130,17 @@ Reactでは、 **JSX** というプリコンパイラが用意されており、
 もちろん、JSXを使用せず、最初から素のJavaScriptで記述することもできます。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  render: function() {
+class TodoApp extends React.Component {
+  render() {
     return (
       React.createElement('div', { className: 'todoApp' },
         'Hello, world! I am a TODO Application.'
       )
     );
   }
-});
+}
 
-React.render(React.createElement(TodoApp, null), document.body);
+ReactDOM.render(React.createElement(TodoApp, null), document.body);
 ```
 
 つまり、`<コンポーネント名 />`という記述は、`React.createElement('コンポーネント名', ...)`でインスタンスを作成するのと同じ結果になります。
@@ -154,32 +155,32 @@ JSXを使用するかどうかは開発者によって決めることができ�
 まだ中身は実装せず、仮の文字列が表示されるようにしておきます。
 
 ```javascript:script
-var TodoForm = React.createClass({
-  render: function() {
+class TodoForm extends React.Component {
+  render() {
     return (
       <div className="todoForm">
         I am a TODO Form.
       </div>
     );
   }
-});
+}
 
-var TodoList = React.createClass({
-  render: function() {
+class TodoList extends React.Component {
+  render() {
     return (
       <div className="todoList">
         I am a TODO List.
       </div>
     );
   }
-});
+}
 ```
 
 次に、作成した2つのコンポーネントを表示するため、TodoAppコンポーネントを修正します。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  render: function() {
+class TodoApp extends React.Component {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -188,7 +189,7 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 TodoAppコンポーネントにTodoFormコンポーネントとTodoListコンポーネントが含まれ画面上に表示されました。
@@ -209,8 +210,8 @@ TodoApp
 親コンポーネントから渡されたTODO名と作成日を表示するようにしてみます。
 
 ```javascript:script
-var Todo = React.createClass({
-  render: function() {
+class Todo extends React.Component {
+  render() {
     return (
       <div className="todo">
         <span className="name">{this.props.children}</span>
@@ -218,7 +219,7 @@ var Todo = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 親から子へのデータの受け渡しは、コンポーネントの **props** （プロパティ）経由で行います。
@@ -228,8 +229,8 @@ propsは`this.props`でアクセスでき、`this.props.children`がTODO名、`t
 では、TodoListコンポーネントにいくつかのTodoコンポーネントを追加してみましょう。
 
 ```javascript:script
-var TodoList = React.createClass({
-  render: function() {
+class TodoList extends React.Component {
+  render() {
     return (
       <div className="todoList">
         <Todo created_at="2015/05/01 9:00:00">牛乳を買う</Todo>
@@ -237,7 +238,7 @@ var TodoList = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 親のTodoListコンポーネントから子のTodoコンポーネントにいくつかのデータを渡しています。
@@ -253,14 +254,16 @@ var TodoList = React.createClass({
 まずは、TodoAppコンポーネントのstateの初期値を定義しましょう。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+    
+    this.state = {
       todos: []
     };
-  },
-
-  render: function() {
+  }
+  
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -269,32 +272,34 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
-`getInitialState`メソッドを定義して、コンポーネントのstateの初期値を決めています。
+`constructor`メソッドで`this.state`の初期化を行い、コンポーネントのstateの初期値を決めています。
 
 次に、先ほどハードコードしていたTODOの内容をstateに設定します。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       todos: []
     };
-  },
+  }
 
-  componentDidMount: function() {
-    // NOTE: ここでAjaxを用いてサーバサイドから取得してもよい
-    var todos = [
+  componentDidMount() {
+    // NOTE: ここでfetch APIを用いてサーバサイドから取得してもよい
+    const todos = [
       { id: 'i9tajxy9', name: '牛乳を買う', created_at: '2015/05/01 9:00:00' },
       { id: 'i9ta58tx', name: 'パンを買う', created_at: '2015/05/01 9:00:00' }
     ];
 
-    this.setState({ todos: todos });
-  },
+    this.setState({ todos });
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -303,7 +308,7 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 ここで、`componentDidMount`メソッドを新しく定義しています。
@@ -311,7 +316,7 @@ componentDidMountメソッドは、コンポーネントがレンダリングさ
 コンポーネントには **ライフサイクルが** あり、他にもいくつかのメソッドを定義することで、状態の変化に応じて実行されます。
 
 次に、TODOの内容を一度`todos`変数に格納しています。
-今回はサーバサイドとの通信は行いませんが、一般的なアプリケーションの様にAjaxを用いてサーバサイドからデータを取得してもよいでしょう。
+今回はサーバサイドとの通信は行いませんが、一般的なアプリケーションの様にfetch APIを用いてサーバサイドからデータを取得してもよいでしょう。
 また、それぞれのTODOを特定できるよう、ランダムな`id`を新たに割り振っています。
 
 componentDidMountメソッドの最後で、todosを`setState`でstateに格納しています。
@@ -322,11 +327,11 @@ Reactでは、setStateが呼ばれることで再レンダリングが行われ�
 では、TODOを動的に表示してみましょう。
 
 ```javascript:script
-var TodoList = React.createClass({
-  render: function() {
-    var todos = this.props.todos.map(function(todo) {
-      return <Todo key={todo.id} created_at={todo.created_at}>{todo.name}</Todo>;
-    });
+class TodoList extends React.Component {
+  render() {
+    var todos = this.props.todos.map(todo => (
+      <Todo key={todo.id} created_at={todo.created_at}>{todo.name}</Todo>
+    ));
     return (
       <div className="todoList">
         {todos}
@@ -351,8 +356,8 @@ TodoListコンポーネントのような同じコンポーネントを複数並
 TodoFormコンポーネントにTODO名の入力欄と送信ボタンを定義していきます。
 
 ```javascript:script
-var TodoForm = React.createClass({
-  render: function() {
+class TodoForm extends React.Component {
+  render() {
     return (
       <form className="todoForm">
         <input type="text" placeholder="TODOを入力..." />
@@ -360,7 +365,7 @@ var TodoForm = React.createClass({
       </form>
     );
   }
-});
+}
 ```
 
 シンプルなフォームが表示されました。
@@ -368,12 +373,18 @@ var TodoForm = React.createClass({
 次に、フォームのsubmitイベントをハンドリングできるようにします。
 
 ```javascript:script
-var TodoForm = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
-  },
+class TodoForm extends React.Component {
+  constructor(...args) {
+    super(...args);
+    
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  render: function() {
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  render() {
     return (
       <form className="todoForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="TODOを入力..." />
@@ -381,7 +392,7 @@ var TodoForm = React.createClass({
       </form>
     );
   }
-});
+}
 ```
 
 Reactでは、`on + イベント名`属性でイベントハンドラをコンポーネントに結びつけることができます。ここでは、フォームのsubmitイベントが発生すると`handleSubmit`メソッドが実行されます。
@@ -390,53 +401,65 @@ Reactでは、`on + イベント名`属性でイベントハンドラをコン�
 このままだと、作成ボタンを押しても入力値が入力エリアに残ってしまいます。値をクリアしてあげましょう。
 
 ```javascript:script
-var TodoForm = React.createClass({
-  handleSubmit: function(e) {
+class TodoForm extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.nameRef = React.createRef();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
 
-    var name = React.findDOMNode(this.refs.name);
+    const name = this.nameRef.current;
     name.value = '';
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <form className="todoForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="TODOを入力..." ref="name" />
+        <input type="text" placeholder="TODOを入力..." ref={this.nameRef} />
         <button type="submit">作成</button>
       </form>
     );
   }
-});
+}
 ```
 
-`ref属性`で子コンポーネントに名前を割り当て、イベントハンドラから`this.refs.name`でコンポーネントを取得しています。さらに、そのコンポーネントに紐付く実際のDOMを`React.findDOMNode`で取得して`name`変数に格納しています。
+`React.createRef`を使い、`this.nameRef`にコンポーネントへの参照を割り当てます。`React.createRef`で作られたコンポーネントの参照は`ref`属性を子コンポーネントに追加することでコンポーネントと紐付けられます。
+さらに、そのコンポーネントに紐付く実際のDOMを`this.nameRef.current`で取得して`name`変数に格納しています。
 最後に、`name.value`を空にすることでフォームに入力した値がクリアされます。
 
 では、入力された内容をもとに、TODOを作成していきましょう。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       todos: []
     };
-  },
+    
+    this.todoCreate = this.todoCreate.bind(this);
+  }
 
-  componentDidMount: function() {
-    // NOTE: ここでAjaxを用いてサーバサイドから取得してもよい
-    var todos = [
+  componentDidMount() {
+    // NOTE: ここでfetch APIを用いてサーバサイドから取得してもよい
+    const todos = [
       { id: 'i9tajxy9', name: '牛乳を買う', created_at: '2015/05/01 9:00:00' },
       { id: 'i9ta58tx', name: 'パンを買う', created_at: '2015/05/01 9:00:00' }
     ];
 
-    this.setState({ todos: todos });
-  },
+    this.setState({ todos });
+  }
 
-  todoCreate: function(name) {
+  todoCreate(name) {
     // TODO: ここでTODOの作成処理を行う
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -445,7 +468,7 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 TODOのデータはTodoAppコンポーネントのstateとして持っているため、TodoAppコンポーネント自身がTODOを作成するのがよいでしょう。そこで、TODOを作成するための`todoCreate`メソッドを定義し、子コンポーネントから実行してもらうことにします。
@@ -454,26 +477,33 @@ TODOの表示と同様に、イベントハンドラについてもprops経由�
 渡されたTodoForm側を見てみましょう。
 
 ```javascript:script
-var TodoForm = React.createClass({
-  handleSubmit: function(e) {
+class TodoForm extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.nameRef = React.createRef();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
 
-    var name = React.findDOMNode(this.refs.name);
+    var name = this.nameRef.current;
     if (name.value !== '') {
       this.props.onTodoCreate(name.value.trim());
     }
     name.value = '';
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <form className="todoForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="TODOを入力..." ref="name" />
+        <input type="text" placeholder="TODOを入力..." ref={this.nameRef} />
         <button type="submit">作成</button>
       </form>
     );
   }
-});
+}
 ```
 
 TodoFormコンポーネントでは、入力された内容が空ではない場合に、propsの`onTodoSubmit`を呼び出しています。すなわち、TodoAppコンポーネントの`todoCreate`メソッドです。
@@ -481,35 +511,41 @@ TodoFormコンポーネントでは、入力された内容が空ではない場
 最後に、TODOの作成処理の実装です。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       todos: []
     };
-  },
+    
+    this.todoCreate = this.todoCreate.bind(this);
+  }
 
-  componentDidMount: function() {
-    // NOTE: ここでAjaxを用いてサーバサイドから取得してもよい
-    var todos = [
+  componentDidMount() {
+    // NOTE: ここでfetch APIを用いてサーバサイドから取得してもよい
+    const todos = [
       { id: 'i9tajxy9', name: '牛乳を買う', created_at: '2015/05/01 9:00:00' },
       { id: 'i9ta58tx', name: 'パンを買う', created_at: '2015/05/01 9:00:00' }
     ];
 
-    this.setState({ todos: todos });
-  },
+    this.setState({ todos });
+  }
 
-  todoCreate: function(name) {
-    // NOTE: ここでAjaxを用いてサーバサイドに送信・作成してもよい
-    var todo = {
+  todoCreate(name) {
+    // NOTE: ここでfetch APIを用いてサーバサイドに送信・作成してもよい
+    const todo = {
       id: (Date.now() + Math.floor(Math.random() * 999999)).toString(36),
-      name: name,
+      name,
       created_at: (new Date()).toLocaleString()
     };
 
-    this.setState({ todos: this.state.todos.concat([todo]) });
-  },
+    this.setState(state => ({
+      todos: state.todos.concat([todo])
+    }));
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -518,7 +554,7 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 `todoCreate`メソッドでは、渡された名前を元にTODOのデータを作成し、`todo`変数に格納しています。（`id`は、ランダムな文字列を取得して指定しています。`created_at`は現在の日付から人間が読みやすい文字列に変換しています。）
@@ -536,12 +572,18 @@ var TodoApp = React.createClass({
 先ほどのフォームと同様に、イベントハンドラも定義します。
 
 ```javascript:script
-var Todo = React.createClass({
-  handleDestroy: function(e) {
-    e.preventDefault();
-  },
+class Todo extends React.Component {
+  constructor(...args) {
+    super(...args);
 
-  render: function() {
+    this.handleDestroy = this.handleDestroy.bind(this);
+  }
+
+  handleDestroy(e) {
+    e.preventDefault();
+  }
+
+  render() {
     return (
       <div className="todo">
         <span className="name">{this.props.children}</span>
@@ -550,7 +592,7 @@ var Todo = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 まだなにも動作しない削除ボタンが定義できました。
@@ -558,39 +600,46 @@ var Todo = React.createClass({
 続いて削除処理の実装です。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       todos: []
     };
-  },
 
-  componentDidMount: function() {
-    // NOTE: ここでAjaxを用いてサーバサイドから取得してもよい
-    var todos = [
+    this.todoCreate = this.todoCreate.bind(this);
+    this.todoDestroy = this.todoDestroy.bind(this);
+  }
+
+  componentDidMount() {
+    // NOTE: ここでfetch APIを用いてサーバサイドから取得してもよい
+    const todos = [
       { id: 'i9tajxy9', name: '牛乳を買う', created_at: '2015/05/01 9:00:00' },
       { id: 'i9ta58tx', name: 'パンを買う', created_at: '2015/05/01 9:00:00' }
     ];
 
-    this.setState({ todos: todos });
-  },
+    this.setState({ todos });
+  }
 
-  todoCreate: function(name) {
-    // NOTE: ここでAjaxを用いてサーバサイドに送信・作成してもよい
-    var todo = {
+  todoCreate(name) {
+    // NOTE: ここでfetch APIを用いてサーバサイドに送信・作成してもよい
+    const todo = {
       id: (Date.now() + Math.floor(Math.random() * 999999)).toString(36),
-      name: name,
+      name,
       created_at: (new Date()).toLocaleString()
     };
 
-    this.setState({ todos: this.state.todos.concat([todo]) });
-  },
+    this.setState(state => ({
+      todos: state.todos.concat([todo])
+    }));
+  }
 
-  todoDestroy: function(id) {
+  todoDestroy(id) {
     // TODO: ここでTODOの削除処理を行う
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -599,7 +648,7 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 作成時と同様、TodoAppコンポーネント自身がTODOを削除するのがよいでしょう。`todoDestroy`メソッドを定義し、TodoListコンポーネントを経由してTodoコンポーネントに渡します。
@@ -607,34 +656,40 @@ var TodoApp = React.createClass({
 TodoListコンポーネントを見てみましょう。
 
 ```javascript:script
-var TodoList = React.createClass({
-  render: function() {
-    var todos = this.props.todos.map(function(todo) {
-      return <Todo key={todo.id} id={todo.id} created_at={todo.created_at} onTodoDestroy={this.props.onTodoDestroy}>{todo.name}</Todo>;
-    }.bind(this));
+class TodoList extends React.Component {
+  render() {
+    const todos = this.props.todos.map(todo => (
+      <Todo key={todo.id} id={todo.id} created_at={todo.created_at} onTodoDestroy={this.props.onTodoDestroy}>{todo.name}</Todo>
+    ));
     return (
       <div className="todoList">
         {todos}
       </div>
     );
   }
-});
+}
 ```
 
-ここでは受け取ったイベントハンドラをそのままTodoコンポーネントに渡しています。`map`メソッドのコールバック関数で`TodoList`コンポーネントを参照するため、`bind(this)`を追加していることに注意してください。
+ここでは受け取ったイベントハンドラをそのままTodoコンポーネントに渡しています。
 また、TODOの削除は`id`で判別するため、新たに`id`を渡しています。
 
 Todoコンポーネントを見てみましょう。
 
 ```javascript:script
-var Todo = React.createClass({
-  handleDestroy: function(e) {
+class Todo extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.handleDestroy = this.handleDestroy.bind(this);
+  }
+
+  handleDestroy(e) {
     e.preventDefault();
 
     this.props.onTodoDestroy(this.props.id);
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todo">
         <span className="name">{this.props.children}</span>
@@ -643,7 +698,7 @@ var Todo = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 TodoListコンポーネントから渡された`onTodoDestroy`イベントハンドラを実行しています。
@@ -652,42 +707,49 @@ TodoListコンポーネントから渡された`onTodoDestroy`イベントハン
 最後に、TodoAppで削除しましょう。
 
 ```javascript:script
-var TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       todos: []
     };
-  },
 
-  componentDidMount: function() {
-    // NOTE: ここでAjaxを用いてサーバサイドから取得してもよい
-    var todos = [
+    this.todoCreate = this.todoCreate.bind(this);
+    this.todoDestroy = this.todoDestroy.bind(this);
+  }
+
+  componentDidMount() {
+    // NOTE: ここでfetch APIを用いてサーバサイドから取得してもよい
+    const todos = [
       { id: 'i9tajxy9', name: '牛乳を買う', created_at: '2015/05/01 9:00:00' },
       { id: 'i9ta58tx', name: 'パンを買う', created_at: '2015/05/01 9:00:00' }
     ];
 
-    this.setState({ todos: todos });
-  },
+    this.setState({ todos });
+  }
 
-  todoCreate: function(name) {
-    // NOTE: ここでAjaxを用いてサーバサイドに送信・作成してもよい
-    var todo = {
+  todoCreate(name) {
+    // NOTE: ここでfetch APIを用いてサーバサイドに送信・作成してもよい
+    const todo = {
       id: (Date.now() + Math.floor(Math.random() * 999999)).toString(36),
-      name: name,
+      name,
       created_at: (new Date()).toLocaleString()
     };
 
-    this.setState({ todos: this.state.todos.concat([todo]) });
-  },
+    this.setState(state => ({
+      todos: state.todos.concat([todo])
+    }));
+  }
 
-  todoDestroy: function(id) {
-    // NOTE: ここでAjaxを用いてサーバサイドに送信・削除してもよい
-    var newTodos = this.state.todos.filter(function(todo) { return todo.id == id ? false : true });
+  todoDestroy(id) {
+    // NOTE: ここでfetch APIを用いてサーバサイドに送信・削除してもよい
+    const newTodos = this.state.todos.filter(todo => todo.id !== id);
 
     this.setState({ todos: newTodos });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -696,7 +758,7 @@ var TodoApp = React.createClass({
       </div>
     );
   }
-});
+}
 ```
 
 stateの`todos`を`filter`メソッドで削除対象以外のものに絞り込みをして新しい配列を`newTodos`に格納しています。あとは、TODOの作成と同様に、`setState`メソッドでstateを更新するだけです。
@@ -720,7 +782,7 @@ ReactはあくまでUIに特化したライブラリのため、これらの問�
 
 # Fluxとは
 
-[Flux](http://facebook.github.io/flux/)とは、Facebook社が提唱しているアプリケーションのアーキテクチャです。これはライブラリ・フレームワークではなく、MVC等と同じく、アプリケーションの設計手法の一つとなります。
+[Flux](https://facebook.github.io/flux/)とは、Facebook社が提唱しているアプリケーションのアーキテクチャです。これはライブラリ・フレームワークではなく、MVC等と同じく、アプリケーションの設計手法の一つとなります。
 
 では、Fluxでのアプリケーションの設計思想は一体どのようなものになるのでしょうか。
 早速、Fluxの特徴を見ていきましょう。
@@ -820,8 +882,8 @@ Homebrewを利用している方は、`brew`コマンドでNode.jsをインス�
 ndenvを利用している方は、`ndenv`コマンドでNode.jsをインストールしましょう。
 
 ```console:ndenvの場合
-% ndenv install v0.12.3
-% ndenv global v0.12.3
+% ndenv install v8.11.4
+% ndenv global v8.11.4
 ```
 
 これでNode.jsの導入ができました。
@@ -849,7 +911,8 @@ ndenvを利用している方は、`ndenv`コマンドでNode.jsをインスト�
     "flux": "^2.0.3",
     "keymirror": "^0.1.1",
     "object-assign": "^2.0.0",
-    "react": "^0.13.3"
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
   },
   "devDependencies": {
     "browserify": "^10.2.0",
@@ -904,7 +967,7 @@ Dispatcherは、Fluxの4つの要素のうちAction CreatorsとStoreを仲介す
 といっても、Dispatcherの実装は驚くほどシンプルです。Facebookが提供するDispatcherをそのまま利用します。
 
 ```js/dispatcher/AppDispatcher.js
-var Dispatcher = require('flux').Dispatcher;
+const Dispatcher = require('flux').Dispatcher;
 
 module.exports = new Dispatcher();
 ```
@@ -922,7 +985,7 @@ module.exports = new Dispatcher();
 まずはActionの識別子から定義しましょう。
 
 ```js/constants/TodoConstants.js
-var keyMirror = require('keymirror');
+const keyMirror = require('keymirror');
 
 module.exports = keyMirror({
   TODO_SETUP:   null,
@@ -947,8 +1010,8 @@ keymirrorは、渡されたオブジェクトのkeyを対応するvalueにコピ
 続いてAction Creatorsを実装しましょう。
 
 ```js/actions/TodoActions.js
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
+const AppDispatcher = require('../dispatcher/AppDispatcher');
+const TodoConstants = require('../constants/TodoConstants');
 
 module.exports = {
   setup: function() {
@@ -990,10 +1053,10 @@ dispatchメソッドに渡した`actionType`に応じて、Store側でビジネ�
 先ほどのAction Creatorsから渡されたActionをもとに、ビジネスロジックの実行とデータの更新を行います。
 
 ```js/stores/TodoStore.js
-var EventEmitter  = require('events').EventEmitter;
-var assign        = require('object-assign');
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
+const EventEmitter  = require('events').EventEmitter;
+const assign        = require('object-assign');
+const AppDispatcher = require('../dispatcher/AppDispatcher');
+const TodoConstants = require('../constants/TodoConstants');
 
 var _todos = [];
 
@@ -1078,17 +1141,23 @@ module.exports = TodoStore;
 まずはTodoコンポーネントです。
 
 ```js/components/Todo.js
-var React       = require('react');
-var TodoActions = require('../actions/TodoActions');
+const React       = require('react');
+const TodoActions = require('../actions/TodoActions');
 
-module.exports = React.createClass({
-  handleDestroy: function(e) {
+class Todo extends React.Component {
+  constructor(...args) {
+    super(...args);
+    
+    this.handleDestroy = this.handleDestroy.bind(this);
+  }
+
+  handleDestroy(e) {
     e.preventDefault();
 
     TodoActions.destroy(this.props.id);
   },
 
-  render: function() {
+  render() {
     return (
       <div className="todo">
         <span className="name">{this.props.children}</span>
@@ -1097,8 +1166,9 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}
 
+module.exports = Todo;
 ```
 
 先ほどまでは親から渡された`onTodoDestroy`イベントハンドラでTODOの削除を行っていましたが、Action Creatorsである`TodoActions`の`destroy`メソッドで削除を行えるようになります。
@@ -1106,49 +1176,60 @@ module.exports = React.createClass({
 続いて、TodoListコンポーネントです。
 
 ```js/components/TodoList.js
-var React = require('react');
-var Todo  = require('./Todo');
+const React = require('react');
+const Todo  = require('./Todo');
 
-module.exports = React.createClass({
-  render: function() {
-    var todos = this.props.todos.map(function(todo) {
-      return <Todo key={todo.id} id={todo.id} created_at={todo.created_at}>{todo.name}</Todo>;
-    });
+class TodoList extends React.Component {
+  render() {
+    const todos = this.props.todos.map(todo => (
+      <Todo key={todo.id} id={todo.id} created_at={todo.created_at}>{todo.name}</Todo>
+    ));
     return (
       <div className="todoList">
         {todos}
       </div>
     );
   }
-});
+}
+
+module.exports = TodoList;
 ```
 
-`Todo`コンポーネントで直接アクションできるようになったため、`onTodoDestroy`イベントハンドラを引き回す必要がなくなりました。スコープを`TodoList`で固定する必要がなくなったので`bind(this)`も外すことにします。
+`Todo`コンポーネントで直接アクションできるようになったため、`onTodoDestroy`イベントハンドラを引き回す必要がなくなりました。
 
 続いて、TodoFormコンポーネントです。
 
 ```js/components/TodoForm.js
-var React       = require('react');
-var TodoActions = require('../actions/TodoActions');
+const React       = require('react');
+const TodoActions = require('../actions/TodoActions');
 
-module.exports = React.createClass({
-  handleSubmit: function(e) {
+class TodoForm extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.nameRef = React.createRef();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
     e.preventDefault();
 
-    var name = React.findDOMNode(this.refs.name);
+    var name = this.nameRef.current;
     TodoActions.create(name.value.trim());
     name.value = '';
   },
 
-  render: function() {
+  render() {
     return (
       <form className="todoForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="TODOを入力..." ref="name" />
+        <input type="text" placeholder="TODOを入力..." ref={this.nameRef} />
         <button type="submit">作成</button>
       </form>
     );
   }
-});
+}
+
+module.exports = TodoForm;
 ```
 
 こちらも、Todoコンポーネントと同様に直接`TodoActions`経由でTODOの作成を行えるようになりました。
@@ -1156,33 +1237,35 @@ module.exports = React.createClass({
 最後に、TodoAppコンポーネントです。
 
 ```js/components/TodoApp.js
-var React       = require('react');
-var TodoActions = require('../actions/TodoActions');
-var TodoStore   = require('../stores/TodoStore');
-var TodoForm    = require('./TodoForm');
-var TodoList    = require('./TodoList');
+const React       = require('react');
+const TodoActions = require('../actions/TodoActions');
+const TodoStore   = require('../stores/TodoStore');
+const TodoForm    = require('./TodoForm');
+const TodoList    = require('./TodoList');
 
-module.exports = React.createClass({
-  getInitialState: function() {
-    return {
+class TodoApp extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
       todos: TodoStore.getAll()
     };
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     TodoStore.addChangeListener(this._onChange);
     TodoActions.setup();
-  },
+  }
 
   componentWillUnmount: function() {
     TodoStore.removeChangeListener(this._onChange);
-  },
+  }
 
-  _onChange: function() {
+  _onChange() {
     this.setState({ todos: TodoStore.getAll() });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="todoApp">
         <h1>TODO Application</h1>
@@ -1191,7 +1274,9 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}
+
+module.exports = TodoApp;
 ```
 
 ずいぶんとすっきりしましたね。
@@ -1210,10 +1295,11 @@ TodoAppコンポーネントが実際のDOMツリーから削除された際、`
 最後に、TodoAppコンポーネントを実際のDOMツリーにレンダリングしましょう。
 
 ```js/app.js
-var React   = require('react');
-var TodoApp = require('./components/TodoApp');
+const React    = require('react');
+const ReactDOM = require('react-dom');
+const TodoApp  = require('./components/TodoApp');
 
-React.render(<TodoApp />, document.body);
+ReactDOM.render(<TodoApp />, document.body);
 ```
 
 このファイルをBrowserifyでブラウザが解釈できるJavaScriptに変換します。
@@ -1264,8 +1350,8 @@ ReactとFluxを例に取りながら、JavaScriptフレームワークを用い�
 
 # 参考資料
 
-- [JavaScriptのフレームワークについて検討してみよう](http://postd.cc/javascript-framework-fatigue/)
-- [一人React.js Advent Calendar 2014](http://qiita.com/advent-calendar/2014/reactjs)
+- [JavaScriptのフレームワークについて検討してみよう](https://postd.cc/javascript-framework-fatigue/)
+- [一人React.js Advent Calendar 2014](https://qiita.com/advent-calendar/2014/reactjs)
 - [今話題のReact.jsはどのようなWebアプリケーションに適しているか？ Introduction To React─ Frontrend Conference](https://html5experts.jp/hokaccha/13301/)
-- [社内勉強会でReactとFluxについて喋った](http://inside.pixiv.net/entry/2015/04/27/170944)
-- [What is Flux - いまさら始める、クライアントサイドの設計とFlux](http://www.slideshare.net/axross/what-is-flux)
+- [社内勉強会でReactとFluxについて喋った](https://devpixiv.hatenablog.com/entry/2015/04/27/170944)
+- [What is Flux - いまさら始める、クライアントサイドの設計とFlux](https://www.slideshare.net/axross/what-is-flux)

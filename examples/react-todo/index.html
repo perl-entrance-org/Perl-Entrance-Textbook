@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React TODO</title>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.0.0/babel.min.js"></script>
+  </head>
+  <body>
+    <script type="text/babel">
+      class TodoApp extends React.Component {
+        constructor(...args) {
+          super(...args);
+
+          this.state = {
+            todos: []
+          };
+        }
+
+        componentDidMount() {
+          // NOTE: ここでfetch APIを用いてサーバサイドから取得してもよい
+          const todos = [
+            { id: 'i9tajxy9', name: '牛乳を買う', created_at: '2015/05/01 9:00:00' },
+            { id: 'i9ta58tx', name: 'パンを買う', created_at: '2015/05/01 9:00:00' }
+          ];
+
+          this.setState({ todos });
+
+          this.todoCreate = this.todoCreate.bind(this);
+          this.todoDestroy = this.todoDestroy.bind(this);
+        }
+
+        todoCreate(name) {
+          // NOTE: ここでfetch APIを用いてサーバサイドに送信・作成してもよい
+          const todo = {
+            id: (Date.now() + Math.floor(Math.random() * 999999)).toString(36),
+            name,
+            created_at: (new Date()).toLocaleString()
+          };
+
+          this.setState(state => ({
+            todos: state.todos.concat([todo])
+          }));
+        }
+
+        todoDestroy(id) {
+          // NOTE: ここでfetch APIを用いてサーバサイドに送信・削除してもよい
+          const newTodos = this.state.todos.filter(todo => todo.id !== id);
+
+          this.setState({ todos: newTodos });
+        }
+
+        render() {
+          return (
+            <div className="todoApp">
+              <h1>TODO Application</h1>
+              <TodoForm onTodoCreate={this.todoCreate} />
+              <TodoList todos={this.state.todos} onTodoDestroy={this.todoDestroy} />
+            </div>
+          );
+        }
+      }
+
+      class TodoForm extends React.Component {
+        constructor(...args) {
+          super(...args);
+
+          this.nameRef = React.createRef();
+          this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleSubmit(e) {
+          e.preventDefault();
+
+          const name = this.nameRef.current;
+          if (name.value !== '') {
+            this.props.onTodoCreate(name.value.trim());
+          }
+          name.value = '';
+        }
+
+        render() {
+          return (
+            <form className="todoForm" onSubmit={this.handleSubmit}>
+              <input type="text" placeholder="TODOを入力..." ref={this.nameRef} />
+              <button type="submit">作成</button>
+            </form>
+          );
+        }
+      }
+
+      class TodoList extends React.Component {
+        render() {
+          const todos = this.props.todos.map(todo => (
+            <Todo key={todo.id} id={todo.id} created_at={todo.created_at} onTodoDestroy={this.props.onTodoDestroy}>{todo.name}</Todo>
+          ));
+
+          return (
+            <div className="todoList">
+              {todos}
+            </div>
+          );
+        }
+      }
+
+      class Todo extends React.Component {
+        constructor(...args) {
+          super(...args);
+
+          this.handleDestroy = this.handleDestroy.bind(this);
+        }
+
+        handleDestroy(e) {
+          e.preventDefault();
+
+          this.props.onTodoDestroy(this.props.id);
+        }
+
+        render() {
+          return (
+            <div className="todo">
+              <span className="name">{this.props.children}</span>
+              <span className="date">{this.props.created_at}</span>
+              <button onClick={this.handleDestroy}>削除</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<TodoApp />, document.body);
+    </script>
+  </body>
+</html>
